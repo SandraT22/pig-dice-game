@@ -15,10 +15,12 @@
     <h1>Pig Dice Game!</h1>
     <div class="container">
       <form id="startGame">
-        <label>
-          Number of Players
-          <input type="number" id="numberOfPlayers" min="1">
-        </label>
+        <label for="numberOfPlayers">Number of Players</label>
+        <input type="number" id="numberOfPlayers" min="1">
+        <br>
+        <label for="numberOfDice">Number of Dice</label>
+        <input type="number" id="numberOfDice" min="1" max="2">
+        <br>
         <button type="submit">Start Game</button>
       </form>
     </div>
@@ -31,7 +33,8 @@
           <div id="dice">
           </div>
           <div id="pigs">
-
+          </div>
+          <div id="pigs2">
           </div>
         </div>
         <div class="col-4">

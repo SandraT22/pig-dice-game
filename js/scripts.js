@@ -1,19 +1,20 @@
 //Variable Declaration
 var score = 0; //points for this turn
-var dice = 0; //last value rolled
+var numberOfDice = 1;
+var dice = [0]; //last value rolled
 var players = []; // array where scores are stored at
 var maxPlayers = 0; //total player count
 var playerNumber = 1; // who's turn it is
 var lastPlayer = 0; // who's turn was last
 var pigString = '<img src="img/pig.png" alt="pig">'; // display cute pigs
+var pigString2 = '<img src="img/pig.png" alt="pig">'; // display cute pigs
 
 //Buisiness Logic
 
 function turn() {
-  if (rollDice() > 1){
-    console.log(dice);
-    score += dice;
-    return score;
+  dice.forEach(function(element) {
+    if (rollDice(dice) > 1){
+
   }
   else {
     score = 0;
@@ -21,6 +22,8 @@ function turn() {
     nextPlayer();
     return playerNumber;
   }
+  });
+    score += dice;
 }
 
 function passTurn(){
@@ -42,13 +45,19 @@ function nextPlayer(){
   return playerNumber;
 }
 
-function rollDice () {
-  dice = parseInt(Math.random()*6 + 1) ;
+function rollDice (roll) {
+  roll = parseInt(Math.random()*6 + 1) ;
+  
   pigString = '<img src="img/pig.png" alt="pig">';
   for (i = 1; i < dice; i++) {
     pigString += '<img src="img/pig.png" alt="pig">';
   }
-  return dice;
+  pigString2 = '<img src="img/pig.png" alt="pig">';
+  for (i = 1; i < dice2; i++) {
+    pigString2 += '<img src="img/pig.png" alt="pig">';
+  }
+
+  return roll;
 }
 
 //UI Logic
@@ -70,9 +79,16 @@ $(document).ready(function() {
   $("form#startGame").submit(function(event) {
     event.preventDefault();
     maxPlayers = $("#numberOfPlayers").val();
+    numberOfDice = $("#numberOfDice").val();
     players = [];
     for (i = 0; i < maxPlayers; i++) {
       players.push(0);
+    }
+    if (numberOfDice < 2) {
+    $("#pigs2").hide();
+    }
+    else {
+      dice = [0,0];
     }
     $(".row").show();
     $("#winner").hide();
