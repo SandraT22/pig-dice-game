@@ -1,42 +1,50 @@
 //Variable Declaration
 var score = 0; //points for this turn
 var numberOfDice = 1;
-var dice = [0]; //last value rolled
+var dice1 = 0;
+var dice2 = 0; //last value rolled
 var players = []; // array where scores are stored at
 var maxPlayers = 0; //total player count
 var playerNumber = 1; // who's turn it is
 var lastPlayer = 0; // who's turn was last
-var hasRolledOne = 0;
-var j = 0;
 var pigString = '<img src="img/pig.png" alt="pig">'; // display cute pigs
 var pigString2 = '<img src="img/pig.png" alt="pig">'; // display cute pigs
 
 //Buisiness Logic
 
 function turn() {
-  let j = 0;
-  dice.forEach(function(element) {
-    if (rollDice(element) > 1){
-      
+  if (numberOfDice === 2){
+    if (rollDice() === 1){
+      if (roll2Dice() === 1){
+        players[playerNumber-1] = 0;
+        score = 0;
+        nextPlayer();
+      }
+      else{
+        score = 0;
+        nextPlayer();
+      }
+    }
+    else if(roll2Dice() === 1) {
+      score = 0;
+      nextPlayer();
     }
     else {
-      hasRolledOne += 1;
+      score += dice1 + dice2;
     }
-    j++;
-  });
-    if (hasRolledOne === 2){
-
-    } else if (hasRolledOne === 1) {
+  }
+  else {      
+    if(rollDice() === 1) {
       score = 0;
-      $("#currentPlayer").text("Current score: " + players[playerNumber-1] +  " Points this turn: 0");
       nextPlayer();
-      return playerNumber;
-    }else {
-      score += dice[0] + dice[1];
     }
-    return score;
-}
-
+    else {
+      score += dice1;
+    }
+  }
+  return score;
+  }    
+  
 function passTurn(){
   players[playerNumber-1] += score;
   score = 0;
@@ -56,18 +64,22 @@ function nextPlayer(){
   return playerNumber;
 }
 
-function rollDice (roll) {
-  roll = parseInt(Math.random()*6 + 1) ;
-  dice[j] = roll;
+function rollDice () {
+  dice1 = parseInt(Math.random()*6 + 1);
   pigString = '<img src="img/pig.png" alt="pig">';
-  for (i = 1; i < dice[0]; i++) {
+  for (i = 1; i < dice1; i++) {
     pigString += '<img src="img/pig.png" alt="pig">';
   }
+  return dice1;
+}
+
+function roll2Dice () {
+  dice2 = parseInt(Math.random()*6 + 1);
   pigString2 = '<img src="img/pig.png" alt="pig">';
-  for (i = 1; i < dice[1]; i++) {
+  for (i = 1; i < dice2; i++) {
     pigString2 += '<img src="img/pig.png" alt="pig">';
   }
-  return roll;
+  return dice2;
 }
 
 //UI Logic
@@ -80,7 +92,7 @@ function scoreboard() {
   $("#score").text(scoreString);
   $("#nextTurn").text("Player " + playerNumber + "'s turn");
   $("#currentPlayer").text("Current score: " + players[playerNumber-1] +  " Points this turn: " + score);
-  $("#dice").text("You rolled a " + dice[0]);
+  $("#dice").text("You rolled a " + dice1);
   $("#pigs").html(pigString);
 }
 
@@ -96,9 +108,6 @@ $(document).ready(function() {
     }
     if (numberOfDice < 2) {
     $("#pigs2").hide();
-    }
-    else {
-      dice = [0,0];
     }
     $(".row").show();
     $("#winner").hide();
