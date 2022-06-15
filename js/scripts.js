@@ -1,10 +1,10 @@
 //Variable Declaration
 var score = 0;
 var dice = 0;
-var players = [0,0,0,0]
+var players = [];
+var maxPlayers = 0;
 var playerNumber = 1;
-var lastPlayer = 0
-var maxPlayers = 4;
+var lastPlayer = 0;
 
 //Buisiness Logic
 
@@ -16,9 +16,9 @@ function turn() {
   }
   else {
     score = 0;
-    console.log("next players turn");
+    $("#currentPlayer").text("Current score: " + players[playerNumber-1] +  " Points this turn: 0");
     nextPlayer();
-    return false;
+    return playerNumber;
   }
 }
 
@@ -32,39 +32,59 @@ function passTurn(){
 
 function nextPlayer(){
   lastPlayer = playerNumber;
+
   if(playerNumber < maxPlayers) {
     playerNumber += 1;
+    console.log("add")
   }
   else{
     playerNumber = 1;
+    console.log("broken")
   }
   return playerNumber;
 }
 
 function rollDice () {
-  dice = parseInt(Math.random()*6);
+  dice = parseInt(Math.random()*6 + 1) ;
   return dice;
-}
-
-//Player Logic
-
-switch (playerNumber) {
-  case (1):
-    console.log("2");
-    break;
-  case (2):
-    console.log("Green!");
-    break;
-  case (3):
-    console.log("Blue!");
-    break;
-  case (4):
-
-    break;
-  default:
-    console.log("It's not red, blue, or green.");
 }
 
 //UI Logic
 
+function scoreboard() {
+  let scoreString = " ";
+  for (i = 1; i <= maxPlayers; i++) {
+    scoreString += "Player " + i + " : " + players[i-1] + "\n";
+  }
+  $("#score").text(scoreString);
+  $("#nextTurn").text("Player " + playerNumber + "'s turn");
+  $("#currentPlayer").text("Current score: " + players[playerNumber-1] +  " Points this turn: " + score);
+  $("#dice").text("You rolled a " + dice);
+}
 
+$(document).ready(function() {
+  $("form#startGame").submit(function(event) {
+    event.preventDefault();
+    maxPlayers = $("#numberOfPlayers").val();
+    players = [];
+    for (i = 0; i < maxPlayers; i++) {
+      players.push(0);
+    }
+    console.log(players);
+  });
+  $("form#passTurn").submit(function(event) {
+    event.preventDefault();
+    if (players[playerNumber-1] >= 100) {
+      $("#output").text("Player " + playerNumber + "wins");
+    }
+    else {
+      passTurn();
+      scoreboard();
+    }
+  });
+  $("form#rollDice").submit(function(event) {
+    event.preventDefault();
+    turn();
+    scoreboard();
+  });
+});

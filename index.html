@@ -11,7 +11,7 @@
     <form id="startGame">
       <label>
         Number of Players
-        <input>
+        <input type="number" id="numberOfPlayers" min="1">
       </label>
       <button type="submit">Start Game</button>
     </form>
@@ -21,7 +21,14 @@
     <form id="rollDice">
       <button type="submit">Roll Dice</button>
     </form>
-    <div id="output">
+    <div id="score">
     </div>
+    <div id="nextTurn">
+    </div>
+    <div id="currentPlayer">
+    </div>
+    <div id="dice">
+    </div>
+
   </body>
 </html>
