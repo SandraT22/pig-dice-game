@@ -8,6 +8,52 @@
   font-style: italic;
 }
 
-h1 {
+#pigs {
+  height: 11rem;
+  width: 11rem;
+  border: 0.2rem solid black;
+  border-radius: 0.3rem;
+  margin: 3px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.col-4, .col-8, .col-12 {
+ padding: 0px;
+ border: 0.6rem ridge rgba(229, 163, 206, 0.918);
+ text-align: center;
+ border-radius: 0.3rem;
+}
+
+.row {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+body {
+ background-color: rgb(247, 247, 247);
+}
+
+h1, h2 {
+  font-family: 'Fascinate', cursive;
+  color: rgb(149, 114, 140);
+  background-color: rgb(223, 169, 210);
   text-align: center;
+  margin: 0px;
+}
+
+img {
+  height: 3.4rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+button {
+  padding: 6px;
+  margin: 1px;
+  color: white;
+  background-color: rgb(84, 138, 255);
+  border-radius: 0.3rem;
+  border: 0.3rem rgb(84, 138, 255);
+  border-style: inset ridge ridge inset;
 }

@@ -1,15 +1,16 @@
 //Variable Declaration
-var score = 0;
-var dice = 0;
-var players = [];
-var maxPlayers = 0;
-var playerNumber = 1;
-var lastPlayer = 0;
+var score = 0; //points for this turn
+var dice = 0; //last value rolled
+var players = []; // array where scores are stored at
+var maxPlayers = 0; //total player count
+var playerNumber = 1; // who's turn it is
+var lastPlayer = 0; // who's turn was last
+var pigString = '<img src="img/pig.png" alt="pig">'; // display cute pigs
 
 //Buisiness Logic
 
 function turn() {
-  if (rollDice()>1){
+  if (rollDice() > 1){
     console.log(dice);
     score += dice;
     return score;
@@ -43,6 +44,10 @@ function nextPlayer(){
 
 function rollDice () {
   dice = parseInt(Math.random()*6 + 1) ;
+  pigString = '<img src="img/pig.png" alt="pig">';
+  for (i = 1; i < dice; i++) {
+    pigString += '<img src="img/pig.png" alt="pig">';
+  }
   return dice;
 }
 
@@ -57,9 +62,11 @@ function scoreboard() {
   $("#nextTurn").text("Player " + playerNumber + "'s turn");
   $("#currentPlayer").text("Current score: " + players[playerNumber-1] +  " Points this turn: " + score);
   $("#dice").text("You rolled a " + dice);
+  $("#pigs").html(pigString);
 }
 
 $(document).ready(function() {
+  $(".row").hide();
   $("form#startGame").submit(function(event) {
     event.preventDefault();
     maxPlayers = $("#numberOfPlayers").val();
@@ -67,6 +74,7 @@ $(document).ready(function() {
     for (i = 0; i < maxPlayers; i++) {
       players.push(0);
     }
+    $(".row").show();
     $("#winner").hide();
     $("#rollDice").show();
     $("#passTurn").show();
@@ -86,8 +94,6 @@ $(document).ready(function() {
       $("#passTurn").hide();
       $("#startGame").show();
     }
-
-
   });
   $("form#rollDice").submit(function(event) {
     event.preventDefault();
