@@ -6,24 +6,35 @@ var players = []; // array where scores are stored at
 var maxPlayers = 0; //total player count
 var playerNumber = 1; // who's turn it is
 var lastPlayer = 0; // who's turn was last
+var hasRolledOne = 0;
+var j = 0;
 var pigString = '<img src="img/pig.png" alt="pig">'; // display cute pigs
 var pigString2 = '<img src="img/pig.png" alt="pig">'; // display cute pigs
 
 //Buisiness Logic
 
 function turn() {
+  let j = 0;
   dice.forEach(function(element) {
-    if (rollDice(dice) > 1){
-
-  }
-  else {
-    score = 0;
-    $("#currentPlayer").text("Current score: " + players[playerNumber-1] +  " Points this turn: 0");
-    nextPlayer();
-    return playerNumber;
-  }
+    if (rollDice(element) > 1){
+      
+    }
+    else {
+      hasRolledOne += 1;
+    }
+    j++;
   });
-    score += dice;
+    if (hasRolledOne === 2){
+
+    } else if (hasRolledOne === 1) {
+      score = 0;
+      $("#currentPlayer").text("Current score: " + players[playerNumber-1] +  " Points this turn: 0");
+      nextPlayer();
+      return playerNumber;
+    }else {
+      score += dice[0] + dice[1];
+    }
+    return score;
 }
 
 function passTurn(){
@@ -47,16 +58,15 @@ function nextPlayer(){
 
 function rollDice (roll) {
   roll = parseInt(Math.random()*6 + 1) ;
-  
+  dice[j] = roll;
   pigString = '<img src="img/pig.png" alt="pig">';
-  for (i = 1; i < dice; i++) {
+  for (i = 1; i < dice[0]; i++) {
     pigString += '<img src="img/pig.png" alt="pig">';
   }
   pigString2 = '<img src="img/pig.png" alt="pig">';
-  for (i = 1; i < dice2; i++) {
+  for (i = 1; i < dice[1]; i++) {
     pigString2 += '<img src="img/pig.png" alt="pig">';
   }
-
   return roll;
 }
 
@@ -70,7 +80,7 @@ function scoreboard() {
   $("#score").text(scoreString);
   $("#nextTurn").text("Player " + playerNumber + "'s turn");
   $("#currentPlayer").text("Current score: " + players[playerNumber-1] +  " Points this turn: " + score);
-  $("#dice").text("You rolled a " + dice);
+  $("#dice").text("You rolled a " + dice[0]);
   $("#pigs").html(pigString);
 }
 
