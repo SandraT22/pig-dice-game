@@ -24,7 +24,6 @@ function turn() {
 
 function passTurn(){
   players[playerNumber-1] += score;
-  console.log(players[playerNumber-1]);
   score = 0;
   nextPlayer();
   return players[lastPlayer-1];
@@ -35,11 +34,9 @@ function nextPlayer(){
 
   if(playerNumber < maxPlayers) {
     playerNumber += 1;
-    console.log("add")
   }
   else{
     playerNumber = 1;
-    console.log("broken")
   }
   return playerNumber;
 }
@@ -54,7 +51,7 @@ function rollDice () {
 function scoreboard() {
   let scoreString = " ";
   for (i = 1; i <= maxPlayers; i++) {
-    scoreString += "Player " + i + " : " + players[i-1] + "\n";
+    scoreString += "Player " + i + " : " + players[i-1] + "  \n";
   }
   $("#score").text(scoreString);
   $("#nextTurn").text("Player " + playerNumber + "'s turn");
@@ -70,7 +67,6 @@ $(document).ready(function() {
     for (i = 0; i < maxPlayers; i++) {
       players.push(0);
     }
-    console.log(players);
     $("#rollDice").show();
     $("#passTurn").show();
     $("#startGame").hide();
@@ -79,7 +75,10 @@ $(document).ready(function() {
   $("form#passTurn").submit(function(event) {
     event.preventDefault();
     if (players[playerNumber-1] >= 100) {
-      $("#output").text("Player " + playerNumber + "wins");
+      $("#nextTurn").text("Player " + playerNumber + "wins");
+      $("#rollDice").hide();
+      $("#passTurn").hide();
+      $("#startGame").show();
     }
     else {
       passTurn();
