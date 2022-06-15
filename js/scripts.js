@@ -65,3 +65,6 @@ switch (playerNumber) {
     console.log("It's not red, blue, or green.");
 }
 
+//UI Logic
+
+
