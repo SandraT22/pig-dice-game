@@ -71,6 +71,10 @@ $(document).ready(function() {
       players.push(0);
     }
     console.log(players);
+    $("#rollDice").show();
+    $("#passTurn").show();
+    $("#startGame").hide();
+    scoreboard();
   });
   $("form#passTurn").submit(function(event) {
     event.preventDefault();
