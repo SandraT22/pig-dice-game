@@ -67,6 +67,7 @@ $(document).ready(function() {
     for (i = 0; i < maxPlayers; i++) {
       players.push(0);
     }
+    $("#winner").hide();
     $("#rollDice").show();
     $("#passTurn").show();
     $("#startGame").hide();
@@ -74,16 +75,19 @@ $(document).ready(function() {
   });
   $("form#passTurn").submit(function(event) {
     event.preventDefault();
-    if (players[playerNumber-1] >= 100) {
-      $("#nextTurn").text("Player " + playerNumber + "wins");
+    passTurn();
+    scoreboard();
+    if (players[lastPlayer-1] >= 100) {
+      $("#winner").show();
+      $("#winner").text("Player " + playerNumber + " wins!");
+      $("#currentPlayer").hide();
+      $("#dice").hide();
       $("#rollDice").hide();
       $("#passTurn").hide();
       $("#startGame").show();
     }
-    else {
-      passTurn();
-      scoreboard();
-    }
+
+
   });
   $("form#rollDice").submit(function(event) {
     event.preventDefault();

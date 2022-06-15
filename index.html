@@ -8,27 +8,42 @@
     <title>Pig Dice</title>
   </head>
   <body>
-    <form id="startGame">
-      <label>
-        Number of Players
-        <input type="number" id="numberOfPlayers" min="1">
-      </label>
-      <button type="submit">Start Game</button>
-    </form>
-    <form id="rollDice">
-      <button type="submit">Roll Dice</button>
-    </form>
-    <form id="passTurn">
-      <button type="submit">Pass Turn</button>
-    </form>
-    <div id="score">
+    <h1>Pig Dice Game!</h1>
+    <div class="container">
+      <form id="startGame">
+        <label>
+          Number of Players
+          <input type="number" id="numberOfPlayers" min="1">
+        </label>
+        <button type="submit">Start Game</button>
+      </form>
     </div>
-    <div id="nextTurn">
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <form id="rollDice">
+            <button type="submit">Roll Dice</button>
+          </form>
+          <div id="dice">
+          </div>
+        </div>
+        <div class="col-4">
+          <form id="passTurn">
+            <button type="submit">Pass Turn</button>
+          </form>
+          <div id="nextTurn">
+          </div>
+        </div>
+        <div class="col-4">
+          <h2>Scoreboard</h2>
+          <div id="winner">
+          </div>
+          <div id="score">
+          </div>
+          <div id="currentPlayer">
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="currentPlayer">
-    </div>
-    <div id="dice">
-    </div>
-
   </body>
 </html>

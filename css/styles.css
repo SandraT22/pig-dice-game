@@ -1,3 +1,13 @@
 #rollDice, #passTurn {
   display: none;
 }
+
+#winner {
+  color: blue;
+  font-size: xx-large;
+  font-style: italic;
+}
+
+h1 {
+  text-align: center;
+}
