@@ -9,6 +9,7 @@ var playerNumber = 1; // who's turn it is
 var lastPlayer = 0; // who's turn was last
 var pigString = '<img src="img/pig.png" alt="pig">'; // display cute pigs
 var pigString2 = '<img src="img/pig.png" alt="pig">'; // display cute pigs
+var isCpuPlayer = false;
 
 //Buisiness Logic
 
@@ -48,6 +49,9 @@ function turn() {
       score += dice1;
     }
   }
+  if (isCpuPlayer){
+    cpuPlayer();
+  }
   return score;
   }    
   
@@ -66,6 +70,9 @@ function nextPlayer(){
   }
   else{
     playerNumber = 1;
+  }
+  if (isCpuPlayer){
+    cpuPlayer();
   }
   return playerNumber;
 }
@@ -91,17 +98,48 @@ function roll2Dice () {
 //CPU Player Logic
 
 function cpuPlayer() {
-  for (let i = 0; i >= 100; i++) {
-  if (score===100) {
-  $("#winner").text("Player " + playerNumber + " wins!");
-  } else if (score < 100) {
-    passTurn();
-    } 
+  if (playerNumber > 1){//is it cpu's turn
+    // cpu logic
+    if  (score > 0) {
+      //random decisions
+      if (rollDice() > 3){
+        rollDiceForm();
+      }
+      else {
+        passTurnForm();
+      }
+    }
+    else {
+      rollDiceForm();
+    }
   }
 }
+
  
 
 //UI Logic
+
+function rollDiceForm(){
+  turn();
+  scoreboard();
+}
+
+function passTurnForm() {
+  passTurn();
+  scoreboard();
+  if (players[lastPlayer-1] >= 100) {
+    $("#winner").show();
+    $("#winner").text("Player " + playerNumber + " wins!");
+    $("#currentPlayer").hide();
+    $("#dice").hide();
+    $("#rollDice").hide();
+    $("#passTurn").hide();
+    $("#startGame").show();
+    $("#cpuGame").show();
+  }
+}
+
+
 
 function scoreboard() {
   let scoreString = " ";
@@ -123,12 +161,14 @@ $(document).ready(function() {
     event.preventDefault();
     maxPlayers = $("#numberOfPlayers").val();
     numberOfDice = $("#numberOfDice").val();
+    isCpuPlayer = false;
     players = [];
     for (i = 0; i < maxPlayers; i++) {
       players.push(0);
     }
     if (numberOfDice < 2) {
-    $("#pigs2").hide();
+      $("#dice2").hide();
+      $("#pigs2").hide();
     }
     $(".row").show();
     $("#winner").hide();
@@ -142,13 +182,14 @@ $(document).ready(function() {
     event.preventDefault();
     maxPlayers = $("#numberOfPlayers").val();
     numberOfDice = $("#numberOfDice").val();
-    
+    isCpuPlayer = true;
     players = [];
     for (i = 0; i < maxPlayers; i++) {
       players.push(0);
     }
     if (numberOfDice < 2) {
-    $("#pigs2").hide();
+      $("#dice2").hide();
+      $("#pigs2").hide();
     }
     $(".row").show();
     $("#winner").hide();
@@ -157,27 +198,14 @@ $(document).ready(function() {
     $("#startGame").hide();
     $("#cpuGame").hide();
     scoreboard();
-    cpuPlayer();
   });
 
   $("form#passTurn").submit(function(event) {
     event.preventDefault();
-    passTurn();
-    scoreboard();
-    if (players[lastPlayer-1] >= 100) {
-      $("#winner").show();
-      $("#winner").text("Player " + playerNumber + " wins!");
-      $("#currentPlayer").hide();
-      $("#dice").hide();
-      $("#rollDice").hide();
-      $("#passTurn").hide();
-      $("#startGame").show();
-      $("#cpuGame").show();
-    }
+    passTurnForm()
   });
   $("form#rollDice").submit(function(event) {
     event.preventDefault();
-    turn();
-    scoreboard();
+    rollDiceForm();
   });
 });
