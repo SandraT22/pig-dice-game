@@ -88,11 +88,24 @@ function roll2Dice () {
   return dice2;
 }
 
+//CPU Player Logic
+
+function cpuPlayer() {
+  for (let i = 0; i >= 100; i++) {
+  if (score===100) {
+  $("#winner").text("Player " + playerNumber + " wins!");
+  } else if (score < 100) {
+    passTurn();
+    } 
+  }
+}
+ 
+
 //UI Logic
 
 function scoreboard() {
   let scoreString = " ";
-  for (i = 1; i <= maxPlayers; i++) {
+  for (let i = 1; i <= maxPlayers; i++) {
     scoreString += "Player " + i + " : " + players[i-1] + "  \n";
   }
   $("#score").text(scoreString);
@@ -122,8 +135,31 @@ $(document).ready(function() {
     $("#rollDice").show();
     $("#passTurn").show();
     $("#startGame").hide();
+    $("#cpuGame").hide();
     scoreboard();
   });
+  $("form#cpuGame").submit(function(event) {
+    event.preventDefault();
+    maxPlayers = $("#numberOfPlayers").val();
+    numberOfDice = $("#numberOfDice").val();
+    
+    players = [];
+    for (i = 0; i < maxPlayers; i++) {
+      players.push(0);
+    }
+    if (numberOfDice < 2) {
+    $("#pigs2").hide();
+    }
+    $(".row").show();
+    $("#winner").hide();
+    $("#rollDice").show();
+    $("#passTurn").show();
+    $("#startGame").hide();
+    $("#cpuGame").hide();
+    scoreboard();
+    cpuPlayer();
+  });
+
   $("form#passTurn").submit(function(event) {
     event.preventDefault();
     passTurn();
