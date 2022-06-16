@@ -13,28 +13,34 @@ var pigString2 = '<img src="img/pig.png" alt="pig">'; // display cute pigs
 //Buisiness Logic
 
 function turn() {
-  if (numberOfDice === 2){
-    if (rollDice() === 1){
-      if (roll2Dice() === 1){
-        players[playerNumber-1] = 0;
-        score = 0;
-        nextPlayer();
+  if (numberOfDice > 1){ //checks for user input of 2 dice
+    console.log("2 dice"); //tests if (numberOfDice > 1) is working
+    if (rollDice() < 2){ // if you rolled a number equal to 1
+      console.log("dice 1 = 1"); // tests if (rollDice() < 2) is working
+      if (roll2Dice() < 2){ //checks if the dice number rolled is greater than 2
+        console.log("dice 2 = 1"); // Tests if (rollDice() < 2) is working
+        players[playerNumber-1] = 0; // Sets current players score to 0
+        score = 0; //sets score variable back to 0
+        nextPlayer(); // calls next player function. 
       }
-      else{
-        score = 0;
-        nextPlayer();
+      else{ //if each dice is more than 1
+        console.log("dice 2 = 1"); // Tests if else statement is working
+        score = 0; //set score variable back to 0
+        nextPlayer(); // call on next player function
       }
     }
-    else if(roll2Dice() === 1) {
-      score = 0;
-      nextPlayer();
+    else if(roll2Dice() < 2) { //
+      score = 0; // sets score variable to 0
+      nextPlayer(); // calls the next player function
     }
-    else {
+    else { //
+      console.log(dice1);
+      console.log(dice2);
       score += dice1 + dice2;
-    }
+    }          //     end of 2 dice code   //
   }
-  else {      
-    if(rollDice() === 1) {
+  else {     // if only 1 dice is inputted 
+    if(rollDice() < 2) {
       score = 0;
       nextPlayer();
     }
@@ -93,7 +99,9 @@ function scoreboard() {
   $("#nextTurn").text("Player " + playerNumber + "'s turn");
   $("#currentPlayer").text("Current score: " + players[playerNumber-1] +  " Points this turn: " + score);
   $("#dice").text("You rolled a " + dice1);
+  $("#dice2").text("You rolled a " + dice2);
   $("#pigs").html(pigString);
+  $("#pigs2").html(pigString2);
 }
 
 $(document).ready(function() {
@@ -128,6 +136,7 @@ $(document).ready(function() {
       $("#rollDice").hide();
       $("#passTurn").hide();
       $("#startGame").show();
+      $("#cpuGame").show();
     }
   });
   $("form#rollDice").submit(function(event) {
