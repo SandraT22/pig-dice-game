@@ -16,6 +16,7 @@
   margin: 3px;
   margin-left: auto;
   margin-right: auto;
+  background-color: rgb(247, 247, 247);
 }
 
 .col-4, .col-8, .col-12 {
@@ -31,7 +32,9 @@
 }
 
 body {
- background-color: rgb(247, 247, 247);
+  text-align: center;
+  background-color: rgb(240, 225, 249);
+  background-image: url(/img/movingDice.gif);
 }
 
 h1, h2 {
@@ -42,7 +45,15 @@ h1, h2 {
   margin: 0px;
 }
 
-img {
+#winner img {
+  height: 10rem;
+}
+
+#winner {
+background-color: #ffffff;
+}
+
+#pigs img, #pigs2 img {
   height: 3.4rem;
   margin-top: auto;
   margin-bottom: auto;
@@ -57,3 +68,4 @@ button {
   border: 0.3rem rgb(84, 138, 255);
   border-style: inset ridge ridge inset;
 }
+

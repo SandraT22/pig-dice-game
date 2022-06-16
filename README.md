@@ -1,3 +1,7 @@
+Known Bugs: 
+* Malfunction when CPU played with 2 dice. Keeps going on its own and speeds up.
+* Sound effect plays when page is loaded and not when a button is clicked.  
+
 Describe: 
 
 Test: Test will see if user can roll a dice and receive a random numbre between 1 and 6 back. 

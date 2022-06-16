@@ -10,8 +10,15 @@ var lastPlayer = 0; // who's turn was last
 var pigString = '<img src="img/pig.png" alt="pig">'; // display cute pigs
 var pigString2 = '<img src="img/pig.png" alt="pig">'; // display cute pigs
 var isCpuPlayer = false;
+var clickSound;
 
 //Buisiness Logic
+
+function sound(src) {
+  clickSound = new sound("win31.mp3");
+  clickSound.play();
+  rollDiceForm.start();
+}
 
 function turn() {
   if (numberOfDice > 1){ //checks for user input of 2 dice
@@ -99,28 +106,20 @@ function roll2Dice () {
 setTimeout(cpuPlayer, 5000);
 
 function cpuPlayer() {
-  if (playerNumber > 1){//is it cpu's turn
+  if (playerNumber > 1){//is it cpu's turn?
     // cpu logic
     if  (score > 0) {
       //random decisions
       if (rollDice() > 3){
-        // setTimeout(() => {
-          //   scoreString += "Player " + i + " : " + players[i-1] + "  \n";
-          //   }, 1000)
-          // }
-          // sleep (200);
       setTimeout(rollDiceForm, 1000);
       console.log("Hello");
-      // rollDiceForm();
       }
       else {
         setTimeout(passTurnForm, 1000);
-        // passTurnForm();
       }
     }
     else {
       setTimeout(rollDiceForm, 1000);
-      // rollDiceForm();
     }
   }
 }
@@ -138,9 +137,10 @@ function rollDiceForm(){
 function passTurnForm() {
   passTurn();
   scoreboard();
+  sound();
   if (players[lastPlayer-1] >= 100) {
     $("#winner").show();
-    $("#winner").text("Player " + playerNumber + " wins!");
+    $("#winner").html("<img src='img/celebrationPig.jpg' alt='Pig with hat and party blower.'></img> <br> <h3>Player " + lastPlayer + " wins!</h3>");
     $("#currentPlayer").hide();
     $("#dice").hide();
     $("#rollDice").hide();
@@ -205,6 +205,7 @@ $(document).ready(function() {
   });
   $("form#rollDice").submit(function(event) {
     event.preventDefault();
+    //let myAudio = document.querySelector('#audio')myAudio.play()
     rollDiceForm();
   });
 });
