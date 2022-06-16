@@ -96,6 +96,7 @@ function roll2Dice () {
 }
 
 //CPU Player Logic
+setTimeout(cpuPlayer, 5000);
 
 function cpuPlayer() {
   if (playerNumber > 1){//is it cpu's turn
@@ -103,17 +104,27 @@ function cpuPlayer() {
     if  (score > 0) {
       //random decisions
       if (rollDice() > 3){
-        rollDiceForm();
+        // setTimeout(() => {
+          //   scoreString += "Player " + i + " : " + players[i-1] + "  \n";
+          //   }, 1000)
+          // }
+          // sleep (200);
+      setTimeout(rollDiceForm, 1000);
+      console.log("Hello");
+      // rollDiceForm();
       }
       else {
-        passTurnForm();
+        setTimeout(passTurnForm, 1000);
+        // passTurnForm();
       }
     }
     else {
-      rollDiceForm();
+      setTimeout(rollDiceForm, 1000);
+      // rollDiceForm();
     }
   }
 }
+
 
  
 
@@ -139,17 +150,17 @@ function passTurnForm() {
   }
 }
 
-function startForm(){
+function startForm() {
   maxPlayers = $("#numberOfPlayers").val();
   numberOfDice = $("#numberOfDice").val();
   players = [];
-  for (i = 0; i < maxPlayers; i++) {
+  for (let i = 0; i < maxPlayers; i++) {
     players.push(0);
-  }
+    }
   if (numberOfDice < 2) {
-    $("#dice2").hide();
-    $("#pigs2").hide();
-  }
+  $("#dice2").hide();
+  $("#pigs2").hide();
+  } 
   $(".row").show();
   $("#winner").hide();
   $("#rollDice").show();
@@ -173,6 +184,8 @@ function scoreboard() {
   $("#pigs2").html(pigString2);
 }
 
+
+//Document Ready
 $(document).ready(function() {
   $(".row").hide();
   $("form#startGame").submit(function(event) {
