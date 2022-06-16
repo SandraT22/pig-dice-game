@@ -139,7 +139,25 @@ function passTurnForm() {
   }
 }
 
-
+function startForm(){
+  maxPlayers = $("#numberOfPlayers").val();
+  numberOfDice = $("#numberOfDice").val();
+  players = [];
+  for (i = 0; i < maxPlayers; i++) {
+    players.push(0);
+  }
+  if (numberOfDice < 2) {
+    $("#dice2").hide();
+    $("#pigs2").hide();
+  }
+  $(".row").show();
+  $("#winner").hide();
+  $("#rollDice").show();
+  $("#passTurn").show();
+  $("#startGame").hide();
+  $("#cpuGame").hide();
+  scoreboard();
+}
 
 function scoreboard() {
   let scoreString = " ";
@@ -159,45 +177,13 @@ $(document).ready(function() {
   $(".row").hide();
   $("form#startGame").submit(function(event) {
     event.preventDefault();
-    maxPlayers = $("#numberOfPlayers").val();
-    numberOfDice = $("#numberOfDice").val();
     isCpuPlayer = false;
-    players = [];
-    for (i = 0; i < maxPlayers; i++) {
-      players.push(0);
-    }
-    if (numberOfDice < 2) {
-      $("#dice2").hide();
-      $("#pigs2").hide();
-    }
-    $(".row").show();
-    $("#winner").hide();
-    $("#rollDice").show();
-    $("#passTurn").show();
-    $("#startGame").hide();
-    $("#cpuGame").hide();
-    scoreboard();
+    startForm();
   });
   $("form#cpuGame").submit(function(event) {
     event.preventDefault();
-    maxPlayers = $("#numberOfPlayers").val();
-    numberOfDice = $("#numberOfDice").val();
     isCpuPlayer = true;
-    players = [];
-    for (i = 0; i < maxPlayers; i++) {
-      players.push(0);
-    }
-    if (numberOfDice < 2) {
-      $("#dice2").hide();
-      $("#pigs2").hide();
-    }
-    $(".row").show();
-    $("#winner").hide();
-    $("#rollDice").show();
-    $("#passTurn").show();
-    $("#startGame").hide();
-    $("#cpuGame").hide();
-    scoreboard();
+    startForm();
   });
 
   $("form#passTurn").submit(function(event) {
