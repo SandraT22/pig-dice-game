@@ -3,7 +3,7 @@
 }
 
 #winner {
-  color: blue;
+  color: rgb(255, 87, 121);
   font-size: xx-large;
   font-style: italic;
 }
@@ -12,18 +12,18 @@
   height: 11rem;
   width: 11rem;
   border: 0.2rem inset rgb(108, 108, 108);
-  border-radius: 0.3rem;
+  border-radius: 0.4rem;
   margin: 3px;
   margin-left: auto;
   margin-right: auto;
-  background-color: rgb(247, 247, 247);
 }
 
 .col-4, .col-8, .col-12 {
- padding: 0px;
+ padding: 20pt;
  border: 0.6rem ridge rgba(229, 163, 206, 0.918);
  text-align: center;
  border-radius: 0.3rem;
+ margin-block: 20pt;
 }
 
 .row {
@@ -32,26 +32,31 @@
 }
 
 body {
+  padding: 20pt;
   text-align: center;
-  background-color: rgb(240, 225, 249);
-  background-image: url(/img/movingDice.gif);
+  font-family: impact;
+  background-color: pink;
+}
+
+.container { 
+  margin-top:20;
+
 }
 
 h1, h2 {
   font-family: 'Fascinate', cursive;
   color: rgb(149, 114, 140);
-  background-color: rgb(223, 169, 210);
+  font-size: 45pt;
   text-align: center;
-  margin: 0px;
+  margin: 20px;
+  background-color: rgba(240, 225, 249, 0.938);
 }
 
 #winner img {
   height: 10rem;
 }
 
-#winner {
-background-color: #ffffff;
-}
+
 
 #pigs img, #pigs2 img {
   height: 3.4rem;
@@ -61,11 +66,22 @@ background-color: #ffffff;
 
 button {
   padding: 6px;
-  margin: 1px;
+  margin:5px;
   color: white;
-  background-color: rgb(84, 138, 255);
-  border-radius: 0.3rem;
-  border: 0.3rem rgb(84, 138, 255);
+  background-color: rgb(213, 96, 162);
+  border-radius: 0.7rem;
+  border: 0.rem rgb(255, 219, 242);
   border-style: inset ridge ridge inset;
+  font-family: impact;
+  width: 25%;
 }
 
+input { 
+  color:rgb(153, 93, 128);
+  background-color: lightpink;
+}
+
+html {
+  background-color: pink;
+  background-image: url(/img/movingDice.gif);
+}
