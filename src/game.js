@@ -11,6 +11,7 @@ export default class Game {
     if (numberOfDice > 1){
       this.dice2 = new Dice(6);
     } else {
+      this.numberOfDice = 1;
       this.dice2 = "";
     }
 
@@ -37,9 +38,11 @@ export default class Game {
   }
   
   takeTurn() {
+    this.dice1.roll()
     if (this.numberOfDice > 1){ //checks for user input of 2 dice
-      if (this.dice1.roll() < 2){ // if you rolled a number equal to 1
-        if (this.dice2.roll() < 2){ //checks if the dice number rolled is greater than 2
+      this.dice2.roll()
+      if (this.dice1.value < 2){ // if you rolled a number equal to 1
+        if (this.dice2.value < 2){ //checks if the dice number rolled is greater than 2
           this.players[this.currentPlayer].score = 0; // this.players[currentPlayer].score   Sets current players score to 0
           this.players[this.currentPlayer].turnScore = 0; //sets score variable back to 0
           this.nextPlayer(); // calls next player function. 
@@ -49,28 +52,29 @@ export default class Game {
           this.nextPlayer(); // call on next player function
         }
       }
-      else if(this.dice2.roll() < 2) { //
+      else if(this.dice2.value < 2) { //
         this.players[this.currentPlayer].turnScore = 0; // sets score variable to 0
         this.nextPlayer(); // calls the next player function
       }
       else {
-        this.players[this.currentPlayer].turnScore += this.dice1 + this.dice2;
+        this.players[this.currentPlayer].turnScore += this.dice1.value + this.dice2.value;
       }          //  -- end of 2 dice code --  //
     }
     else {     // if only 1 dice is inputted 
-      if(this.dice1.roll() < 2) { //this.dice1 = Dice(6) === this.sided = 6?
+      if(this.dice1.value < 2) { //this.dice1 = Dice(6) === this.sided = 6?
         this.players[this.currentPlayer].turnScore = 0;  //score manipulation missing? & something wrong with the .turn score. Both for playing with only 1 dice. 
         this.nextPlayer();
       }
       else {
-        this.players[this.currentPlayer].turnScore += parseInt(this.dice1);
+        console.log(this.players[this.currentPlayer].turnScore)
+        this.players[this.currentPlayer].turnScore =+ parseInt(this.dice1.value); 
       }
     }
     return this.players[this.currentPlayer].turnScore;
   }
 
   passTurn(){
-    this.players[this.currentPlayer].score += parseInt(this.players[this.currentPlayer].turnScore);
+    this.players[this.currentPlayer].score += this.dice1.value;
     this.players[this.currentPlayer].turnScore = 0;
     this.nextPlayer();
     return this.players[this.currentPlayer];
