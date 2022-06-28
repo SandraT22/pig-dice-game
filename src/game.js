@@ -1,7 +1,7 @@
-import { Dice } from 'dice.js';
-import { Player } from 'player.js';
+import Dice from '../src/dice.js';
+import Player from '../src/player.js';
 
-export class Game {
+export default class Game {
   constructor(maxPlayers, numberOfDice) {
     this.maxPlayers = maxPlayers;
     this.numberOfDice = numberOfDice;
@@ -40,43 +40,42 @@ export class Game {
     if (this.numberOfDice > 1){ //checks for user input of 2 dice
       if (this.dice1.roll() < 2){ // if you rolled a number equal to 1
         if (this.dice2.roll() < 2){ //checks if the dice number rolled is greater than 2
-          this.players[currentPlayer].score = 0; // this.players[currentPlayer].score   Sets current players score to 0
-          this.players[currentPlayer].turnScore = 0; //sets score variable back to 0
+          this.players[this.currentPlayer].score = 0; // this.players[currentPlayer].score   Sets current players score to 0
+          this.players[this.currentPlayer].turnScore = 0; //sets score variable back to 0
           this.nextPlayer(); // calls next player function. 
         }
         else{ //if dice 2 is more than 1
-          score = 0; //set score variable back to 0
+          this.players[this.currentPlayer].score = 0; //set score variable back to 0
           this.nextPlayer(); // call on next player function
         }
       }
       else if(this.dice2.roll() < 2) { //
-        this.players[currentPlayer].turnScore = 0; // sets score variable to 0
+        this.players[this.currentPlayer].turnScore = 0; // sets score variable to 0
         this.nextPlayer(); // calls the next player function
       }
       else {
-        this.players[currentPlayer].turnScore += this.dice1 + this.dice2;
+        this.players[this.currentPlayer].turnScore += this.dice1 + this.dice2;
       }          //  -- end of 2 dice code --  //
     }
     else {     // if only 1 dice is inputted 
       if(this.dice1.roll() < 2) {
-        this.players[currentPlayer].turnScore = 0;
+        this.players[this.currentPlayer].turnScore = 0;
         this.nextPlayer();
       }
       else {
-        this.players[currentPlayer].turnScore += this.dice1;
+        this.players[this.currentPlayer].turnScore += this.dice1;
       }
     }
-    return this.players[currentPlayer].turnScore;
-    }
+    return this.players[this.currentPlayer].turnScore;
+  }
 
-    passTurn(){
-      this.players[currentPlayer].score += this.players[currentPlayer].turnScore;
-      this.players[currentPlayer].turnScore = 0;
-      this.nextPlayer();
-      return this.players[currentPlayer];
-    }
+  passTurn(){
+    this.players[this.currentPlayer].score += this.players[this.currentPlayer].turnScore;
+    this.players[this.currentPlayer].turnScore = 0;
+    this.nextPlayer();
+    return this.players[this.currentPlayer];
+  }
 }
 
   
-
-  //{Game}.players[{playerNumber}]
+//{Game}.players[{playerNumber}]

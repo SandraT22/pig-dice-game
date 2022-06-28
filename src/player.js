@@ -1,4 +1,4 @@
-export class Player {
+export default class Player {
   constructor(playerNumber) {
     this.score = 0;
     this.turnScore = 0;

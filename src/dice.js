@@ -1,4 +1,4 @@
-export class Dice {
+export default class Dice {
   constructor(sides) {
     this.sides = sides;
     this.pigString = '<img src="assets/img/pig.png" alt="pig">';

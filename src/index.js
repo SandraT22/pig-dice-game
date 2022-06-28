@@ -2,23 +2,42 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import { Dice } from 'dice.js';
-import { Player } from 'player.js';
-import { Game } from 'game.js'
+// import Dice from '../src/dice.js';
+// import Player from '../src/player.js';
+import Game from '../src/game.js';
+
+//Document Ready
+$(document).ready(function() {
+  $(".row").hide();
+  $("form#startGame").submit((event) => {
+    event.preventDefault();
+    let maxPlayers = $("#numberOfPlayers").val();
+    let numberOfDice = $("#numberOfDice").val();
+    let pigDice = new Game(maxPlayers, numberOfDice);
+    pigDice.populatePlayers();
+    startForm(pigDice);
+    $("#passTurn").click(() => {
+      passTurnForm(pigDice);
+    });
+    $("#rollDice").click(() => {
+      rollDiceForm(pigDice);
+    });
+  });
+});
 
 //UI Logic
 
-function rollDiceForm(){
-  turn();
-  scoreboard();
-}
+const rollDiceForm = (game) => {
+  game.takeTurn();
+  scoreboard(game);
+};
 
-function passTurnForm() {
-  pigDice.passTurn();
-  scoreboard();
-  if (pigDice.players[pigDice.lastPlayer].score >= 100) {
+const passTurnForm = (game) => {
+  game.passTurn();
+  scoreboard(game);
+  if (game.players[game.lastPlayer].score >= 100) {
     $("#winner").show();
-    $("#winner").html("<img src='assets/img/celebrationPig.jpg' alt='Pig with hat and party blower.'></img> <br> <h3>Player " + lastPlayer + " wins!</h3>");
+    $("#winner").html("<img src='assets/img/celebrationPig.jpg' alt='Pig with hat and party blower.'></img> <br> <h3>Player " + game.lastPlayer + " wins!</h3>");
     $("#currentPlayer").hide();
     $("#dice").hide();
     $("#rollDice").hide();
@@ -26,15 +45,12 @@ function passTurnForm() {
     $("#startGame").show();
     $("#cpuGame").show();
   }
-}
+};
 
-function startForm() {
-  let maxPlayers = $("#numberOfPlayers").val();
-  let numberOfDice = $("#numberOfDice").val();
-
-  if (numberOfDice < 2) {
-  $("#dice2").hide();
-  $("#pigs2").hide();
+const startForm = (game) => {
+  if (game.numberOfDice < 2) {
+    $("#dice2").hide();
+    $("#pigs2").hide();
   } 
   $(".row").show();
   $("#winner").hide();
@@ -42,45 +58,19 @@ function startForm() {
   $("#passTurn").show();
   $("#startGame").hide();
   $("#cpuGame").hide();
+  scoreboard(game);
+};
 
-  pigDice = new Game(maxPlayers, numberOfDice)
-  scoreboard();
-}
-
-function scoreboard() {
+const scoreboard = (game) => {
   let scoreString = " ";
-  for (let i = 1; i <= pigDice.maxPlayers; i++) {
-    scoreString += "Player " + i + " : " + pigDice.players[i].score + "  \n";
+  for (let i = 1; i <= game.maxPlayers; i++) {
+    scoreString += "Player " + i + " : " + game.players[i].score + "  \n";
   }
   $("#score").text(scoreString);
-  $("#nextTurn").text("Player " + pigDice.currentPlayer + "'s turn");
-  $("#currentPlayer").text("Current score: " + pigDice.this.players[currentPlayer].turnScore +  " Points this turn: " + score);
-  $("#dice").text(pigDice.players[currentPlayer]);
- // $("#dice2").text("You rolled a " + dice2);
-  $("#pigs").html(pigDice.dice1.pigString);
-  $("#pigs2").html(pigDice.dice2.pigString);
-}
-
-//Document Ready
-$(document).ready(function() {
-  $(".row").hide();
-  $("form#startGame").submit(function(event) {
-    event.preventDefault();
-    startForm();
-  });
-  $("form#cpuGame").submit(function(event) {
-    event.preventDefault();
-    isCpuPlayer = true;
-    startForm();
-  });
-
-  $("form#passTurn").submit(function(event) {
-    event.preventDefault();
-    passTurnForm()
-  });
-  $("form#rollDice").submit(function(event) {
-    event.preventDefault();
-    //let myAudio = document.querySelector('#audio')myAudio.play()
-    rollDiceForm();
-  });
-});
+  $("#nextTurn").text("Player " + game.currentPlayer + "'s turn");
+  $("#currentPlayer").text("Current score: " + game.players[game.currentPlayer].score +  " Points this turn: " + game.players[game.currentPlayer].turnScore);
+  $("#dice").text("You rolled a " + game.players[game.currentPlayer].dice1);
+  $("#dice2").text("You rolled a " + game.players[game.currentPlayer].dice2);
+  $("#pigs").html(game.dice1.pigString);
+  $("#pigs2").html(game.dice2.pigString);
+};
