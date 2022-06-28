@@ -65,6 +65,7 @@ const scoreboard = (game) => {
   let scoreString = " ";
   for (let i = 1; i <= game.maxPlayers; i++) {
     scoreString += "Player " + i + " : " + game.players[i].score + "  \n";
+    console.log(game.players[i]);
   }
   $("#score").text(scoreString);
   $("#nextTurn").text("Player " + game.currentPlayer + "'s turn");

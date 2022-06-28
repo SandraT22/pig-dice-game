@@ -58,19 +58,19 @@ export default class Game {
       }          //  -- end of 2 dice code --  //
     }
     else {     // if only 1 dice is inputted 
-      if(this.dice1.roll() < 2) {
-        this.players[this.currentPlayer].turnScore = 0;
+      if(this.dice1.roll() < 2) { //this.dice1 = Dice(6) === this.sided = 6?
+        this.players[this.currentPlayer].turnScore = 0;  //score manipulation missing? & something wrong with the .turn score. Both for playing with only 1 dice. 
         this.nextPlayer();
       }
       else {
-        this.players[this.currentPlayer].turnScore += this.dice1;
+        this.players[this.currentPlayer].turnScore += parseInt(this.dice1);
       }
     }
     return this.players[this.currentPlayer].turnScore;
   }
 
   passTurn(){
-    this.players[this.currentPlayer].score += this.players[this.currentPlayer].turnScore;
+    this.players[this.currentPlayer].score += parseInt(this.players[this.currentPlayer].turnScore);
     this.players[this.currentPlayer].turnScore = 0;
     this.nextPlayer();
     return this.players[this.currentPlayer];

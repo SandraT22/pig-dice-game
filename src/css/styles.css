@@ -9,13 +9,27 @@
 }
 
 #pigs, #pigs2 {
-  height: 11rem;
-  width: 11rem;
-  border: 0.2rem inset rgb(108, 108, 108);
+  background-color: aliceblue;
+  height: 12rem;
+  width: 12rem;
+  border: 0.2rem rgb(233, 233, 233);
+  border-style: outset inset inset outset;
   border-radius: 0.4rem;
+  outline: rgb(204, 204, 204) solid 0.1rem;
   margin: 3px;
   margin-left: auto;
   margin-right: auto;
+  padding: 0.5rem;
+  align-content: center;  
+  display: grid;
+  grid-template-areas:
+      "a . c"
+      "e g f"
+      "d . b";
+ /* row-gap: 0.5rem;
+ column-gap: 0.5rem; */
+ grid-template-rows: 3.5rem 3.5rem 3.5rem;
+ grid-template-columns: 3.5rem 3.5rem 3.5rem;
 }
 
 .col-4, .col-8, .col-12 {
@@ -59,9 +73,27 @@ h1, h2 {
 
 
 #pigs img, #pigs2 img {
-  height: 3.4rem;
-  margin-top: auto;
-  margin-bottom: auto;
+  align-items: center;
+  height: 3.5rem;
+}
+
+img:nth-child(2) {
+  grid-area: b;
+}
+img:nth-child(3) {
+  grid-area: c;
+}
+img:nth-child(4) {
+  grid-area: d;
+}
+img:nth-child(5) {
+  grid-area: e;
+}
+img:nth-child(6) {
+  grid-area: f;
+}
+img:nth-child(odd):last-child {
+  grid-area: g;
 }
 
 button {
