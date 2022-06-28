@@ -46,5 +46,20 @@ export class Player {
   //   // }
   //   return this.players[currentPlayer].turnScore;
   //   }    
+  //
+  // nextPlayer(){
+  //   this.lastPlayer = this.currentPlayer; 
+  //
+  //   if(this.currentPlayer < this.maxPlayers) {
+  //     this.currentPlayer += 1;
+  //   }
+  //   else{
+  //     this.currentPlayer = 1;
+  //   }
+  //   // if (isCpuPlayer){
+  //   //   cpuPlayer();
+  //   // }
+  //   return this.currentPlayer;
+  // }
 
 }

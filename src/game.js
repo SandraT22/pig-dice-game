@@ -10,6 +10,8 @@ export class Game {
     this.dice1 = new Dice(6);
     if (numberOfDice > 1){
       this.dice2 = new Dice(6);
+    } else {
+      this.dice2 = "";
     }
 
     this.currentPlayer = 1;
@@ -31,13 +33,10 @@ export class Game {
     else{
       this.currentPlayer = 1;
     }
-    // if (isCpuPlayer){
-    //   cpuPlayer();
-    // }
     return this.currentPlayer;
   }
   
-  turn() {
+  takeTurn() {
     if (this.numberOfDice > 1){ //checks for user input of 2 dice
       if (this.dice1.roll() < 2){ // if you rolled a number equal to 1
         if (this.dice2.roll() < 2){ //checks if the dice number rolled is greater than 2
@@ -67,13 +66,15 @@ export class Game {
         this.players[currentPlayer].turnScore += this.dice1;
       }
     }
-
-    // if (isCpuPlayer){
-    //   cpuPlayer();
-    // }
     return this.players[currentPlayer].turnScore;
-    }    
+    }
 
+    passTurn(){
+      this.players[currentPlayer].score += this.players[currentPlayer].turnScore;
+      this.players[currentPlayer].turnScore = 0;
+      this.nextPlayer();
+      return this.players[currentPlayer];
+    }
 }
 
   
