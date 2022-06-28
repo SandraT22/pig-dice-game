@@ -7,8 +7,8 @@ var players = []; // array where scores are stored at
 var maxPlayers = 0; //total player count
 var playerNumber = 1; // who's turn it is
 var lastPlayer = 0; // who's turn was last
-var pigString = '<img src="img/pig.png" alt="pig">'; // display cute pigs
-var pigString2 = '<img src="img/pig.png" alt="pig">'; // display cute pigs
+var pigString = '<img src="assets/img/pig.png" alt="pig">'; // display cute pigs
+var pigString2 = '<img src="assets/img/pig.png" alt="pig">'; // display cute pigs
 var isCpuPlayer = false;
 var clickSound;
 
@@ -86,18 +86,18 @@ function nextPlayer(){
 
 function rollDice () {
   dice1 = parseInt(Math.random()*6 + 1);
-  pigString = '<img src="img/pig.png" alt="pig">';
-  for (i = 1; i < dice1; i++) {
-    pigString += '<img src="img/pig.png" alt="pig">';
+  pigString = '<img src="assets/img/pig.png" alt="pig">';
+  for (let i = 1; i < dice1; i++) {
+    pigString += '<img src="assets/img/pig.png" alt="pig">';
   }
   return dice1;
 }
 
 function roll2Dice () {
   dice2 = parseInt(Math.random()*6 + 1);
-  pigString2 = '<img src="img/pig.png" alt="pig">';
-  for (i = 1; i < dice2; i++) {
-    pigString2 += '<img src="img/pig.png" alt="pig">';
+  pigString2 = '<img src="assets/img/pig.png" alt="pig">';
+  for (let i = 1; i < dice2; i++) {
+    pigString2 += '<img src="assets/img/pig.png" alt="pig">';
   }
   return dice2;
 }
@@ -201,7 +201,7 @@ $(document).ready(function() {
 
   $("form#passTurn").submit(function(event) {
     event.preventDefault();
-    passTurnForm()
+    passTurnForm();
   });
   $("form#rollDice").submit(function(event) {
     event.preventDefault();
