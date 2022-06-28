@@ -37,7 +37,7 @@ const passTurnForm = (game) => {
   scoreboard(game);
   if (game.players[game.lastPlayer].score >= 100) {
     $("#winner").show();
-    $("#winner").html("<img src='assets/img/celebrationPig.jpg' alt='Pig with hat and party blower.'></img> <br> <h3>Player " + game.lastPlayer + " wins!</h3>");
+    $("#winner").html("<img src='../src/assets/img/celebrationPig.jpg' alt='Pig with hat and party blower.'></img> <br> <h3>Player " + game.lastPlayer + " wins!</h3>");
     $("#currentPlayer").hide();
     $("#dice").hide();
     $("#rollDice").hide();
