@@ -12,7 +12,7 @@ $(document).ready(function() {
   $("form#startGame").submit((event) => {
     event.preventDefault();
     let maxPlayers = parseInt($("#numberOfPlayers").val());
-    let numberOfDice = $("#numberOfDice").val();
+    let numberOfDice = parseInt($("#numberOfDice").val());
     let pigDice = new Game(maxPlayers, numberOfDice);
     pigDice.populatePlayers();
     startForm(pigDice);
@@ -50,8 +50,7 @@ const passTurnForm = (game) => {
 
 const startForm = (game) => {
   if (game.numberOfDice < 2) {
-    $("#dice2").hide();
-    $("#pigs2").hide();
+    $("#grunt").hide();
   } 
   $(".row").show();
   $("#winner").hide();
@@ -72,8 +71,8 @@ const scoreboard = (game) => {
   $("#score").text(scoreString);
   $("#nextTurn").text("Player " + game.currentPlayer + "'s turn");
   $("#currentPlayer").text("Current score: " + game.players[game.currentPlayer].score +  " Points this turn: " + game.players[game.currentPlayer].turnScore);
-  $("#dice").text("You rolled a " + game.players[game.currentPlayer].dice1);
-  $("#dice2").text("You rolled a " + game.players[game.currentPlayer].dice2);
+  $("#dice").text("You rolled a " + game.dice1.value);
+  $("#dice2").text("You rolled a " + game.dice2.value);
   $("#pigs").html(game.dice1.pigString);
   $("#pigs2").html(game.dice2.pigString);
 };

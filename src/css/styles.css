@@ -32,6 +32,18 @@
  grid-template-columns: 3.5rem 3.5rem 3.5rem;
 }
 
+.oink {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
+}
+
+#grunt, #snort {
+  flex: 1 0 100px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
 .col-4, .col-8, .col-12 {
  padding: 20pt;
  border: 0.6rem ridge rgba(229, 163, 206, 0.918);

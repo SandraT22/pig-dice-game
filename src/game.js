@@ -57,7 +57,7 @@ export default class Game {
         this.nextPlayer(); // calls the next player function
       }
       else {
-        this.players[this.currentPlayer].turnScore += this.dice1.value + this.dice2.value;
+        this.players[this.currentPlayer].turnScore += (this.dice1.value + this.dice2.value);
       }          //  -- end of 2 dice code --  //
     }
     else {     // if only 1 dice is inputted 
@@ -66,15 +66,14 @@ export default class Game {
         this.nextPlayer();
       }
       else {
-        console.log(this.players[this.currentPlayer].turnScore)
-        this.players[this.currentPlayer].turnScore =+ parseInt(this.dice1.value); 
+        this.players[this.currentPlayer].turnScore += parseInt(this.dice1.value); 
       }
     }
     return this.players[this.currentPlayer].turnScore;
   }
 
   passTurn(){
-    this.players[this.currentPlayer].score += this.dice1.value;
+    this.players[this.currentPlayer].score += this.players[this.currentPlayer].turnScore;
     this.players[this.currentPlayer].turnScore = 0;
     this.nextPlayer();
     return this.players[this.currentPlayer];
